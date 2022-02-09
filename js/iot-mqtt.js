@@ -1,7 +1,7 @@
-var clientId = "ws" + Math.random(); //Dirección aleatoria
+var clientId = "ws"; //Dirección aleatoria
 
 // Create a client instance
-client = new Paho.MQTT.Client("IP del WS", "Puerto del WS", clientId);
+var client = new Paho.MQTT.Client("190.110.108.59", 8083, clientId);
 
 // set callback handlers
 client.onConnectionLost = onConnectionLost;
