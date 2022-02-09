@@ -1,4 +1,4 @@
-var clientId = "ws"; //Dirección aleatoria
+var clientId = "ws" + Math.random(); //Dirección aleatoria
 
 // Create a client instance
 var client = new Paho.MQTT.Client("190.110.108.59", 8083, clientId);
