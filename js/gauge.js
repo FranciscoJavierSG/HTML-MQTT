@@ -3,7 +3,7 @@ am5.ready(function () {
     // Create root element
     // https://www.amcharts.com/docs/v5/getting-started/#Root_element
     var root = am5.Root.new("chartdiv");
-    var Temperatura;
+
     // Set themes
     // https://www.amcharts.com/docs/v5/concepts/themes/
     root.setThemes([
@@ -67,7 +67,7 @@ am5.ready(function () {
         axisDataItem.animate({
             key: "value",
             to: Temperatura,
-            //to: Math.round(Math.random() * 100),
+            //to: Math.round(Math.random() * 50),
             duration: 800,
             easing: am5.ease.out(am5.ease.cubic)
         });

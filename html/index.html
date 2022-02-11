@@ -24,23 +24,31 @@
     <h2>Temperatura</h2>
   </div>
   <div>
-    <p>Valor (en ºC): </p>
-    <a id="ValorTemp"></a>
+    <div style="display: inline-block;">
+      <div style="display: inline-block;">
+        <p style="margin-top: 0;">Valor (en ºC): </p>
+      </div>
+      <div style="display: inline-block;">
+        <p id="ValorTemp" style="margin-top: 0;"></p>
+      </div>
+    </div>
 
     <div id="chartdiv"></div>
-    <!-- Revisar si puedo hacerlo con p -->
   </div>
 
   <div>
-    <h2>Relay</h2>
+    <h2>Relé</h2>
+  </div>
+  <div style="display: inline-block;">
+    <div style="display: inline-block;">
+      <p style="margin-top: 0;">Valor (1 o 0): </p>
+    </div>
+    <div style="display: inline-block;">
+      <p id="ValorRelay" style="margin-top: 0;"></p>
+    </div>
   </div>
   <div>
-    <p>Valor (1 o 0): </p>
-    <a id="ValorRelay"></a> <!-- Revisar si puedo hacerlo con p -->
-  </div>
-  <div>
-    <p>Cambiar el estado del Relay</p>
-    <button onclick="changeRelay()">Cambiar</button>
+    <button onclick="changeRelay()">Cambiar estado</button>
   </div>
 
   <script src="..\js/gauge.js"></script>
@@ -49,14 +57,16 @@
 
 </html>
 
-<script> function changeRelay() {
-    var EstadoRelay = '1';
+<script>
+  var EstadoRelay = '1';
+  function changeRelay() {
     if (EstadoRelay == '1') {
       client.send('Relay', '0');
-      EstadoRelay = 0;
+      return EstadoRelay = 0;
     }
     if (EstadoRelay == '0') {
       client.send('Relay', '1');
-      EstadoRelay = 1;
+      return EstadoRelay = 1;
     }
-  }</script>
+  }
+</script>
