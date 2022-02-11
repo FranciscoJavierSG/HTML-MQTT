@@ -34,7 +34,7 @@ function onConnectionLost(responseObject) {
 function onMessageArrived(message) {
   console.log(message.destinationName + ": " + message.payloadString);
   if (message.destinationName == 'Temp') {
-    //document.getElementById("ValorTemp").textContent = message.payloadString;
+    document.getElementById("ValorTemp").textContent = message.payloadString;
     Temperatura = parseFloat(message.payloadString);
   }
 
