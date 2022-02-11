@@ -1,18 +1,20 @@
-var clientId = "ws" + Math.random(); //Dirección aleatoria
+// Declaración de variables
+var clientId = "ws"; //Dirección aleatoria
+Temperatura = 0;
 
 // Create a client instance
-client = new Paho.MQTT.Client("IP del WS", "Puerto del WS", clientId);
+var client = new Paho.MQTT.Client("190.110.108.59", 8083, clientId);
+//var EstadoRelay;
 
-// set callback handlers
+// Set callback handlers
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 
-// connect the client
+// Connect the client
 client.connect({ onSuccess: onConnect });
 
-// called when the client connects
+// Called when the client connects
 function onConnect() {
-  // Once a connection has been made, make a subscription and send a message.
   console.log("Conectado MQTT-WebSocket");
   client.subscribe("Temp");
   client.subscribe("Relay");
@@ -21,21 +23,33 @@ function onConnect() {
   client.send(message);*/
 }
 
-// called when the client loses its connection
+// Called when the client loses its connection
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("Conexión Perdida. Error:" + responseObject.errorMessage);
   }
 }
 
-// called when a message arrives
+// Called when a message arrives
 function onMessageArrived(message) {
   console.log(message.destinationName + ": " + message.payloadString);
   if (message.destinationName == 'Temp') {
-    document.getElementById("ValorTemp").textContent = message.payloadString;
+    //document.getElementById("ValorTemp").textContent = message.payloadString;
+    Temperatura = parseFloat(message.payloadString);
   }
 
   if (message.destinationName == 'Relay') {
     document.getElementById("ValorRelay").textContent = message.payloadString;
+    EstadoRelay = message.payloadString;
   }
 }
+/*
+// Called when you want to change the Relay's state
+function changeRelay() {
+  if (EstadoRelay == 1) {
+    client.send('Relay', 0);
+  }
+  if (EstadoRelay == 0) {
+    client.send('Relay', 1);
+  }
+}*/
